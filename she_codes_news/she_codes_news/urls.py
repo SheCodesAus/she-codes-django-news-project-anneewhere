@@ -22,3 +22,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
 ]
+
+# hese urls control everything inside the other urls

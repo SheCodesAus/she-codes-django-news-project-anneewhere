@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <h2>{{ user.username }}</h2>
+    <h4>{{ user.email }}</h4>
+    <h4>{{ user.bio }}</h4>
+    <h4>{{ user.profile_picture }}</h4>
+    <h4>{{ user.linkedin }}</h4>
+    </div>
+</div>
+
+{% endblock %}

@@ -19,7 +19,13 @@ class AccountPageView(generic.DetailView):
 class EditAccountView(generic.UpdateView):
     form_class = CustomUserChangeForm
     model = CustomUser
-    context_object_name = 'createAccount'
-    template_name = 'users/createAccount.html'
+    ssuccess_url = reverse_lazy('users:accountpage')
+    template_name = 'users/editAccount.html'
+
     def get_success_url(self):
-        return reverse_lazy('user:profile', kwargs={'pk': self.object.id})
+        print(self.request.user.id)
+        print(type(self.get_form()))
+        return reverse_lazy('users:profile', kwargs={"pk":self.request.user.id})
+        
+    def get_object(self):
+        return self.request.user

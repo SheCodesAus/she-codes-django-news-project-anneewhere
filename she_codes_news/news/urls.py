@@ -9,5 +9,6 @@ urlpatterns = [
     # views.IndexView = views(refers views.py and the specific class within that page)
     path('<int:pk>/', views.StoryView.as_view(), name='story'),
     # sending us to specific primary key (the page). by default, django gives a story each unique identifier
-    path('add-story/', views.AddStoryView.as_view(), name='newStory')
+    path('add-story/', views.AddStoryView.as_view(), name='newStory'),
+    # path('<int:pk>', views.AuthorProfileView.as_view(), name="profileDetail")
 ]

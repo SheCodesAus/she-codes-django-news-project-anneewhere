@@ -9,7 +9,28 @@
     <h4>{{ user.bio }}</h4>
     <h4>{{ user.profile_picture }}</h4>
     <h4>{{ user.linkedin }}</h4>
-    </div>
 </div>
+
+{{ customuser.username }}
+<ul>
+{% for story in customuser.newsstory_set.all %}
+    <li>{{ story.title }}</li>
+{% endfor %}
+</ul>
+
+<!-- edit function -->
+{% if request.user == customuser %}
+
+<button id="edit-profile-button">
+  <a href="{% url 'users:editAccount' %}">Edit Profile</a></button>
+
+<div class="user-add-story">
+  You can write new stories to be shared with other users here:
+  </br>
+  <button id="new-story-button">
+    <a href="{% url 'news:newStory' %}">Write New Story</a></button>
+</div>
+
+{% endif %}
 
 {% endblock %}

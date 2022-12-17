@@ -1,6 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+class Category(models.Model):
+    category_name = models.CharField(max_length=25)
+    def __str__(self):
+        return self.category_name
 
 class NewsStory(models.Model):
     class Meta:
@@ -14,3 +18,6 @@ class NewsStory(models.Model):
     pub_date = models.DateTimeField()
     content = models.TextField()
     image_url = models.URLField()
+    newsCategory = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
+
+

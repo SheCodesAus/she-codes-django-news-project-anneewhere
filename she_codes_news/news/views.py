@@ -2,6 +2,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from .models import NewsStory
 from .forms import StoryForm
+from django.contrib.auth import get_user_model
 
 class AddStoryView(generic.CreateView):
     form_class = StoryForm
@@ -31,3 +32,14 @@ class StoryView(generic.DetailView):
     template_name = 'news/story.html'
     context_object_name = 'story'
 # the only logic applied to this within the html is just defining how the title and content has been displayed
+
+class AuthorProfileView(generic.DetailView):
+    model = get_user_model()
+    template_name = 'news/profileDetail.html'
+    context_object_name = 'story'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author_stories'] = NewsStory.objects.filter(author='author')
+        return context
+

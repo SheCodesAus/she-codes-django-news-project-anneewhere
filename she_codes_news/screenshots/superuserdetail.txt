@@ -1,0 +1,4 @@
+username: Admin1
+password: Admin1
+
+https://github.com/SheCodesAus/she-codes-django-news-project-anneewhere

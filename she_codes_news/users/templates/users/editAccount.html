@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3 id="welcome-user">Welcome {{ user.username }} :female-technologist:</h3>
-<p id="edit-page-txt">Complete your profile by uploading a photo and telling other budding authors a little bit more about yourself!</p>
-<div class="edit-act-container">
-  <h2 id="edit-account-title">Edit Your Profile </br> :pencil2:</h2>
+<h3 id="welcome-user">Welcome {{ user.name }}</h3>
+<p id="edit-page-txt">Edit your profile here!</p>
+<div>
+  <h2 id="edit-account-title">Edit Your Profile</h2>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}

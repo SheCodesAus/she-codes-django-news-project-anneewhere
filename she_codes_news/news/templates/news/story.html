@@ -13,11 +13,30 @@
     <a href="{% url 'users:accountpage' story.author.id %}">
         {{ story.author }}</a>
     <div id="story-content">
-        <img src="{% static '/news/images/placeholder-5.jpg' %}">
+        {% if story.image_url %}
+        <img src="{{ story.image_url }}">
+        {% else %}
+        <img src="https://picsum.photos/300?random={{ story.id }}">
+        {% endif %}
+    
         {{ story.content|linebreaks }}
     </div>
 </div>
 
-{% endblock %}
+<br>
+<br>
+<br>
+<br>
 
-<!-- uses django/python using {} -->
+{% if request.user.is_authenticated %}
+<button>
+    <a href="{% url 'news:editStory' story.author.id %}">Edit Story</a>
+</button>
+<br>
+<br>
+<button>
+<a href="{% url 'news:deleteStory' story.author.id %}">Delete Story</a>
+</button>
+{% endif %}
+
+{% endblock %}

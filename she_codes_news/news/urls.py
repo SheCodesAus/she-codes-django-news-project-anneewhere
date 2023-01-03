@@ -11,4 +11,6 @@ urlpatterns = [
     # sending us to specific primary key (the page). by default, django gives a story each unique identifier
     path('add-story/', views.AddStoryView.as_view(), name='newStory'),
     # path('<int:pk>', views.AuthorProfileView.as_view(), name="profileDetail")
-]
+    path('edit/<int:pk>', views.EditStoryView.as_view(), name='editStory'),
+    path('delete/<int:pk>', views.deleteStoryView.as_view(), name='deleteStory'),
+   ]

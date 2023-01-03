@@ -17,7 +17,7 @@ class NewsStory(models.Model):
     )
     pub_date = models.DateTimeField()
     content = models.TextField()
-    image_url = models.URLField()
+    image_url = models.URLField(blank=True,null=True)
     newsCategory = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
 
 

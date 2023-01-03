@@ -1,6 +1,6 @@
 from django.views import generic
 from django.urls import reverse_lazy
-from .models import NewsStory
+from .models import NewsStory, Category
 from .forms import StoryForm
 from django.contrib.auth import get_user_model
 
@@ -43,3 +43,38 @@ class AuthorProfileView(generic.DetailView):
         context['author_stories'] = NewsStory.objects.filter(author='author')
         return context
 
+class CategoryView(generic.ListView):
+        template_name = 'news/categoryView.html'
+        model = NewsStory, Category
+
+        def get_queryset(self):
+            '''Return all news stories in chosen category.'''
+            return NewsStory.objects.all(Category)
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['categorised_stories'] = NewsStory.objects.all(Category).order_by('-pub_date')[:4]
+            return context
+
+class EditStoryView(generic.edit.UpdateView):
+    form_class = StoryForm
+    context_object_name = 'storyForm'
+    model = NewsStory
+    template_name = 'news/editStory.html'
+    success_url = reverse_lazy('news:story')
+
+    def get_success_url(self):
+        print(self.request.user.id)
+        print(type(self.get_form()))
+        return reverse_lazy('users:profile', kwargs={"pk":self.request.user.id})
+        
+    def get_object(self):
+        return self.request.user
+
+class deleteStoryView(generic.edit.DeleteView):
+    model = NewsStory
+    template_name = 'news/deleteStory.html'
+    success_url = reverse_lazy('news:index')
+
+    def get_object(self):
+        return self.request.user
